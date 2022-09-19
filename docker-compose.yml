@@ -1,0 +1,16 @@
+services:
+  bot:
+    image: mbround18/oghma-bot:latest
+    env_file:
+      - ./.env
+    build: .
+    depends_on:
+      - graphql
+  graphql:
+    image: dgraph/standalone:master
+    ports:
+      - 8080:8080
+      - 8000:8000
+      - 9080:9080
+    volumes:
+      - /tmp/docker-container/oghma-bot/dgraph:/dgraph

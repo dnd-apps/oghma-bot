@@ -1,0 +1,20 @@
+#query User {
+#    getNickGroup(id: 1) {
+#        nickNames {
+#            nick
+#            user
+#        }
+#    }
+#}
+#
+#mutation addGroup {
+#    addNickGroup(input: {nickNames: [], name: "egg"}) {
+#        numUids
+#    }
+#}
+
+query group {
+    getNickGroup(id: 1) {
+        name
+    }
+}
