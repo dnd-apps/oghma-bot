@@ -2,6 +2,8 @@
 
 Bot for D&amp;D to aid in some trivial tasks that can be tedious at the start of the session
 
+[![Build](https://github.com/mbround18/oghma-bot/actions/workflows/build.yml/badge.svg)](https://github.com/mbround18/oghma-bot/actions/workflows/build.yml)
+
 ## Current Features
 
 > More can be added, i just want to get this content added initially.
