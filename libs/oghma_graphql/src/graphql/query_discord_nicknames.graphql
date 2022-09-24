@@ -1,9 +1,10 @@
-query GetUserNickname {
+query QueryDiscordNicknames {
   queryDiscordNickname(filter: { has: nickname }) {
     id
     user {
       id
       name
+      snowflake
     }
     nickname
   }

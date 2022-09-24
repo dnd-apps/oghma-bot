@@ -2,7 +2,7 @@ use crate::cli::Action;
 use crate::outputs::discord_users;
 use clap::Parser;
 use log::info;
-use oghma_graphql::entities::DiscordUsers;
+use oghma_graphql::entities::DiscordUser;
 
 mod cli;
 mod commands;
@@ -22,11 +22,11 @@ async fn main() {
         }
         Action::UploadSchema => commands::upload_schema(&cli.host).await,
         Action::GetUsers => {
-            let users = DiscordUsers::fetch(&cli.host).await;
+            let users = DiscordUser::fetch(&cli.host).await;
             info!("\n{}", discord_users(users))
         }
         Action::AddUser { snowflake, name } => {
-            let users = DiscordUsers::add(&cli.host, snowflake.to_owned(), name.to_owned()).await;
+            let users = DiscordUser::add(&cli.host, snowflake.to_owned(), name.to_owned()).await;
             info!("\n{}", discord_users(users))
         }
     };

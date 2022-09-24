@@ -16,10 +16,7 @@ pub struct DiscordUser {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
-pub struct DiscordUsers {
-    pub users: Vec<DiscordUser>,
-}
+pub type DiscordUsers = Vec<DiscordUser>;
 
 // --------------------------------------
 // Combine into Discord Users
@@ -27,14 +24,14 @@ pub struct DiscordUsers {
 
 // type QueryDiscordUsersResponse = HashMap<String, HashMap<String, DiscordUsers>>;
 
-impl DiscordUsers {
-    pub async fn fetch(host: &str) -> DiscordUsers {
-        // Structs to parse through, instead of stacking hash maps.
+impl DiscordUser {
+    pub async fn fetch(host: &str) -> Vec<DiscordUser> {
         #[derive(Deserialize)]
         struct Query {
             #[serde(rename(deserialize = "queryDiscordUser"))]
-            query_discord_user: DiscordUsers,
+            query: DiscordUsers,
         }
+
         #[derive(Deserialize)]
         struct Response {
             data: Query,
@@ -45,25 +42,35 @@ impl DiscordUsers {
         let response = query_gql(host, request_body).await;
 
         // Parse response
-        let response_json = serde_json::from_str::<Response>(&response)
-            .unwrap_or_else(|parse_error| panic!("Failed to parse response!\n\nWith Error: {parse_error}\n\nResponse Body: {response}\n\n"));
-        response_json.data.query_discord_user
+        let response_json = serde_json::from_str::<Response>(&response);
+        match response_json {
+            Ok(res) => res.data.query,
+            Err(parse_error) => {
+                if format!("{parse_error}").contains("invalid length 0") {
+                    Vec::new()
+                } else {
+                    panic!("Failed to parse users!\n\nWith Error: {parse_error}\n\nResponse Body: {response}\n\n")
+                }
+            }
+        }
     }
-    pub async fn add(host: &str, snowflake: String, name: String) -> DiscordUsers {
+    pub async fn add(host: &str, snowflake: String, name: String) -> Vec<DiscordUser> {
         // Structs to parse through, instead of stacking hash maps.
         #[derive(Deserialize)]
-        struct DiscordUser {
+        struct SubQuery {
             #[serde(rename(deserialize = "discordUser"))]
-            discord_user: DiscordUsers,
+            sub_query: DiscordUsers,
         }
+
         #[derive(Deserialize)]
-        struct AddUser {
+        struct Query {
             #[serde(rename(deserialize = "addDiscordUser"))]
-            add_discord_user: DiscordUser,
+            query: SubQuery,
         }
+
         #[derive(Deserialize)]
         struct Response {
-            data: AddUser,
+            data: Query,
         }
 
         // Build query and get response
@@ -73,9 +80,13 @@ impl DiscordUsers {
         // Parse response
         let response_json = serde_json::from_str::<Response>(&response);
         match response_json {
-            Ok(res) => res.data.add_discord_user.discord_user,
+            Ok(res) => res.data.query.sub_query,
             Err(parse_error) => {
-                panic!("Failed to parse users!\n\nWith Error: {parse_error}\n\nResponse Body: {response}\n\n");
+                if format!("{parse_error}").contains("invalid length 0") {
+                    Vec::new()
+                } else {
+                    panic!("Failed to parse users!\n\nWith Error: {parse_error}\n\nResponse Body: {response}\n\n")
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 query QueryDiscordUsers {
-  queryDiscordUser(filter: { snowflake: { eq: "140642000969007104" } }) {
+  queryDiscordUser(filter: { has: snowflake }) {
     id
     snowflake
     name
