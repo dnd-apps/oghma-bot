@@ -1,0 +1,22 @@
+name: Setup
+author: mbround18
+description: Runs setup for this repo
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.4.1
+
+    - name: Setup | Rust | Nightly
+      uses: ATiltedTree/setup-rust@v1
+      with:
+        rust-version: stable
+        components: clippy rustfmt
+
+    - uses: actions/cache@v3
+      name: Cache Cargo Files
+      with:
+        path: |
+          target/release
+          target/debug
+        key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
