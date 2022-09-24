@@ -1,0 +1,9 @@
+[tasks.port-forward]
+workspace = false
+command = "kubectl"
+args = ["-n", "dgraph", "port-forward", "service/demo-dgraph-alpha", "8123:8080"]
+
+[tasks.upload-schema]
+workspace = false
+command = "cargo"
+args = ["run", "--bin", "oghma-admin", "--", "upload-schema"]

@@ -1,9 +1,0 @@
-query GetUser {
-	queryDiscordUser(filter: {
-		has: snowflake
-	}) {
-		id
-		snowflake
-		name
-	}
-}

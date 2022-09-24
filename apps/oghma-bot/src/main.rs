@@ -6,12 +6,11 @@ use serenity::Client;
 
 mod commands;
 mod environment;
-mod logger;
 
 #[tokio::main]
 async fn main() {
-    logger::init();
     dotenv::dotenv().ok();
+    oghma_logger::init();
 
     let token = discord_token();
     let mut client = Client::builder(

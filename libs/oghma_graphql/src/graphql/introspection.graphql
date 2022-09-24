@@ -1,0 +1,526 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+directive @lambdaOnMutate(add: Boolean, delete: Boolean, update: Boolean) on OBJECT | INTERFACE
+
+directive @cacheControl(maxAge: Int!) on QUERY
+
+directive @generate(mutation: GenerateMutationParams, query: GenerateQueryParams, subscription: Boolean) on OBJECT | INTERFACE
+
+directive @secret(field: String!, pred: String) on OBJECT | INTERFACE
+
+directive @cascade(fields: [String]) on FIELD
+
+directive @withSubscription on OBJECT | FIELD_DEFINITION | INTERFACE
+
+directive @remoteResponse(name: String) on FIELD_DEFINITION
+
+directive @lambda on FIELD_DEFINITION
+
+directive @search(by: [DgraphIndex!]) on FIELD_DEFINITION
+
+directive @dgraph(pred: String, type: String) on OBJECT | FIELD_DEFINITION | INTERFACE
+
+directive @custom(dql: String, http: CustomHTTP) on FIELD_DEFINITION
+
+directive @hasInverse(field: String!) on FIELD_DEFINITION
+
+directive @default(add: DgraphDefault, update: DgraphDefault) on FIELD_DEFINITION
+
+directive @id(interface: Boolean) on FIELD_DEFINITION
+
+directive @auth(add: AuthRule, delete: AuthRule, password: AuthRule, query: AuthRule, update: AuthRule) on OBJECT | INTERFACE
+
+directive @remote on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT
+
+type AddDiscordGroupPayload {
+    discordGroup(filter: DiscordGroupFilter, first: Int, offset: Int, order: DiscordGroupOrder): [DiscordGroup]
+    numUids: Int
+}
+
+type AddDiscordNicknamePayload {
+    discordNickname(filter: DiscordNicknameFilter, first: Int, offset: Int, order: DiscordNicknameOrder): [DiscordNickname]
+    numUids: Int
+}
+
+type AddDiscordUserPayload {
+    discordUser(filter: DiscordUserFilter, first: Int, offset: Int, order: DiscordUserOrder): [DiscordUser]
+    numUids: Int
+}
+
+type DeleteDiscordGroupPayload {
+    discordGroup(filter: DiscordGroupFilter, first: Int, offset: Int, order: DiscordGroupOrder): [DiscordGroup]
+    msg: String
+    numUids: Int
+}
+
+type DeleteDiscordNicknamePayload {
+    discordNickname(filter: DiscordNicknameFilter, first: Int, offset: Int, order: DiscordNicknameOrder): [DiscordNickname]
+    msg: String
+    numUids: Int
+}
+
+type DeleteDiscordUserPayload {
+    discordUser(filter: DiscordUserFilter, first: Int, offset: Int, order: DiscordUserOrder): [DiscordUser]
+    msg: String
+    numUids: Int
+}
+
+type DiscordGroup {
+    id: ID!
+    name: String
+    users(filter: DiscordNicknameFilter, first: Int, offset: Int, order: DiscordNicknameOrder): [DiscordNickname!]
+    usersAggregate(filter: DiscordNicknameFilter): DiscordNicknameAggregateResult
+}
+
+type DiscordGroupAggregateResult {
+    count: Int
+    nameMax: String
+    nameMin: String
+}
+
+type DiscordNickname {
+    id: ID!
+    nickname: String
+    user(filter: DiscordUserFilter): DiscordUser
+}
+
+type DiscordNicknameAggregateResult {
+    count: Int
+    nicknameMax: String
+    nicknameMin: String
+}
+
+type DiscordUser {
+    id: ID!
+    name: String
+    snowflake: String!
+}
+
+type DiscordUserAggregateResult {
+    count: Int
+    nameMax: String
+    nameMin: String
+    snowflakeMax: String
+    snowflakeMin: String
+}
+
+type MultiPolygon {
+    polygons: [Polygon!]!
+}
+
+type Mutation {
+    addDiscordGroup(input: [AddDiscordGroupInput!]!): AddDiscordGroupPayload
+    addDiscordNickname(input: [AddDiscordNicknameInput!]!): AddDiscordNicknamePayload
+    addDiscordUser(input: [AddDiscordUserInput!]!, upsert: Boolean): AddDiscordUserPayload
+    deleteDiscordGroup(filter: DiscordGroupFilter!): DeleteDiscordGroupPayload
+    deleteDiscordNickname(filter: DiscordNicknameFilter!): DeleteDiscordNicknamePayload
+    deleteDiscordUser(filter: DiscordUserFilter!): DeleteDiscordUserPayload
+    updateDiscordGroup(input: UpdateDiscordGroupInput!): UpdateDiscordGroupPayload
+    updateDiscordNickname(input: UpdateDiscordNicknameInput!): UpdateDiscordNicknamePayload
+    updateDiscordUser(input: UpdateDiscordUserInput!): UpdateDiscordUserPayload
+}
+
+type Point {
+    latitude: Float!
+    longitude: Float!
+}
+
+type PointList {
+    points: [Point!]!
+}
+
+type Polygon {
+    coordinates: [PointList!]!
+}
+
+type Query {
+    aggregateDiscordGroup(filter: DiscordGroupFilter): DiscordGroupAggregateResult
+    aggregateDiscordNickname(filter: DiscordNicknameFilter): DiscordNicknameAggregateResult
+    aggregateDiscordUser(filter: DiscordUserFilter): DiscordUserAggregateResult
+    getDiscordGroup(id: ID!): DiscordGroup
+    getDiscordNickname(id: ID!): DiscordNickname
+    getDiscordUser(id: ID, snowflake: String): DiscordUser
+    queryDiscordGroup(filter: DiscordGroupFilter, first: Int, offset: Int, order: DiscordGroupOrder): [DiscordGroup]
+    queryDiscordNickname(filter: DiscordNicknameFilter, first: Int, offset: Int, order: DiscordNicknameOrder): [DiscordNickname]
+    queryDiscordUser(filter: DiscordUserFilter, first: Int, offset: Int, order: DiscordUserOrder): [DiscordUser]
+}
+
+type UpdateDiscordGroupPayload {
+    discordGroup(filter: DiscordGroupFilter, first: Int, offset: Int, order: DiscordGroupOrder): [DiscordGroup]
+    numUids: Int
+}
+
+type UpdateDiscordNicknamePayload {
+    discordNickname(filter: DiscordNicknameFilter, first: Int, offset: Int, order: DiscordNicknameOrder): [DiscordNickname]
+    numUids: Int
+}
+
+type UpdateDiscordUserPayload {
+    discordUser(filter: DiscordUserFilter, first: Int, offset: Int, order: DiscordUserOrder): [DiscordUser]
+    numUids: Int
+}
+
+enum DgraphIndex {
+    bool
+    day
+    exact
+    float
+    fulltext
+    geo
+    hash
+    hour
+    int
+    int64
+    month
+    regexp
+    term
+    trigram
+    year
+}
+
+enum DiscordGroupHasFilter {
+    name
+    users
+}
+
+enum DiscordGroupOrderable {
+    name
+}
+
+enum DiscordNicknameHasFilter {
+    nickname
+    user
+}
+
+enum DiscordNicknameOrderable {
+    nickname
+}
+
+enum DiscordUserHasFilter {
+    name
+    snowflake
+}
+
+enum DiscordUserOrderable {
+    name
+    snowflake
+}
+
+enum HTTPMethod {
+    DELETE
+    GET
+    PATCH
+    POST
+    PUT
+}
+
+enum Mode {
+    BATCH
+    SINGLE
+}
+
+"""
+
+The DateTime scalar type represents date and time as a string in RFC3339 format.
+For example: "1985-04-12T23:20:50.52Z" represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.
+"""
+scalar DateTime
+
+"""
+
+The Int64 scalar type represents a signed 64‐bit numeric non‐fractional value.
+Int64 can represent values in range [-(2^63),(2^63 - 1)].
+"""
+scalar Int64
+
+input AddDiscordGroupInput {
+    name: String
+    users: [DiscordNicknameRef!]
+}
+
+input AddDiscordNicknameInput {
+    nickname: String
+    user: DiscordUserRef
+}
+
+input AddDiscordUserInput {
+    name: String
+    snowflake: String!
+}
+
+input AuthRule {
+    and: [AuthRule]
+    not: AuthRule
+    or: [AuthRule]
+    rule: String
+}
+
+input ContainsFilter {
+    point: PointRef
+    polygon: PolygonRef
+}
+
+input CustomHTTP {
+    body: String
+    forwardHeaders: [String!]
+    graphql: String
+    introspectionHeaders: [String!]
+    method: HTTPMethod!
+    mode: Mode
+    secretHeaders: [String!]
+    skipIntrospection: Boolean
+    url: String!
+}
+
+input DateTimeFilter {
+    between: DateTimeRange
+    eq: DateTime
+    ge: DateTime
+    gt: DateTime
+    in: [DateTime]
+    le: DateTime
+    lt: DateTime
+}
+
+input DateTimeRange {
+    max: DateTime!
+    min: DateTime!
+}
+
+input DgraphDefault {
+    value: String
+}
+
+input DiscordGroupFilter {
+    and: [DiscordGroupFilter]
+    has: [DiscordGroupHasFilter]
+    id: [ID!]
+    not: DiscordGroupFilter
+    or: [DiscordGroupFilter]
+}
+
+input DiscordGroupOrder {
+    asc: DiscordGroupOrderable
+    desc: DiscordGroupOrderable
+    then: DiscordGroupOrder
+}
+
+input DiscordGroupPatch {
+    name: String
+    users: [DiscordNicknameRef!]
+}
+
+input DiscordGroupRef {
+    id: ID
+    name: String
+    users: [DiscordNicknameRef!]
+}
+
+input DiscordNicknameFilter {
+    and: [DiscordNicknameFilter]
+    has: [DiscordNicknameHasFilter]
+    id: [ID!]
+    not: DiscordNicknameFilter
+    or: [DiscordNicknameFilter]
+}
+
+input DiscordNicknameOrder {
+    asc: DiscordNicknameOrderable
+    desc: DiscordNicknameOrderable
+    then: DiscordNicknameOrder
+}
+
+input DiscordNicknamePatch {
+    nickname: String
+    user: DiscordUserRef
+}
+
+input DiscordNicknameRef {
+    id: ID
+    nickname: String
+    user: DiscordUserRef
+}
+
+input DiscordUserFilter {
+    and: [DiscordUserFilter]
+    has: [DiscordUserHasFilter]
+    id: [ID!]
+    not: DiscordUserFilter
+    or: [DiscordUserFilter]
+    snowflake: StringHashFilter
+}
+
+input DiscordUserOrder {
+    asc: DiscordUserOrderable
+    desc: DiscordUserOrderable
+    then: DiscordUserOrder
+}
+
+input DiscordUserPatch {
+    name: String
+    snowflake: String
+}
+
+input DiscordUserRef {
+    id: ID
+    name: String
+    snowflake: String
+}
+
+input FloatFilter {
+    between: FloatRange
+    eq: Float
+    ge: Float
+    gt: Float
+    in: [Float]
+    le: Float
+    lt: Float
+}
+
+input FloatRange {
+    max: Float!
+    min: Float!
+}
+
+input GenerateMutationParams {
+    add: Boolean
+    delete: Boolean
+    update: Boolean
+}
+
+input GenerateQueryParams {
+    aggregate: Boolean
+    get: Boolean
+    password: Boolean
+    query: Boolean
+}
+
+input Int64Filter {
+    between: Int64Range
+    eq: Int64
+    ge: Int64
+    gt: Int64
+    in: [Int64]
+    le: Int64
+    lt: Int64
+}
+
+input Int64Range {
+    max: Int64!
+    min: Int64!
+}
+
+input IntFilter {
+    between: IntRange
+    eq: Int
+    ge: Int
+    gt: Int
+    in: [Int]
+    le: Int
+    lt: Int
+}
+
+input IntRange {
+    max: Int!
+    min: Int!
+}
+
+input IntersectsFilter {
+    multiPolygon: MultiPolygonRef
+    polygon: PolygonRef
+}
+
+input MultiPolygonRef {
+    polygons: [PolygonRef!]!
+}
+
+input NearFilter {
+    coordinate: PointRef!
+    distance: Float!
+}
+
+input PointGeoFilter {
+    near: NearFilter
+    within: WithinFilter
+}
+
+input PointListRef {
+    points: [PointRef!]!
+}
+
+input PointRef {
+    latitude: Float!
+    longitude: Float!
+}
+
+input PolygonGeoFilter {
+    contains: ContainsFilter
+    intersects: IntersectsFilter
+    near: NearFilter
+    within: WithinFilter
+}
+
+input PolygonRef {
+    coordinates: [PointListRef!]!
+}
+
+input StringExactFilter {
+    between: StringRange
+    eq: String
+    ge: String
+    gt: String
+    in: [String]
+    le: String
+    lt: String
+}
+
+input StringFullTextFilter {
+    alloftext: String
+    anyoftext: String
+}
+
+input StringHashFilter {
+    eq: String
+    in: [String]
+}
+
+input StringRange {
+    max: String!
+    min: String!
+}
+
+input StringRegExpFilter {
+    regexp: String
+}
+
+input StringTermFilter {
+    allofterms: String
+    anyofterms: String
+}
+
+input UpdateDiscordGroupInput {
+    filter: DiscordGroupFilter!
+    remove: DiscordGroupPatch
+    set: DiscordGroupPatch
+}
+
+input UpdateDiscordNicknameInput {
+    filter: DiscordNicknameFilter!
+    remove: DiscordNicknamePatch
+    set: DiscordNicknamePatch
+}
+
+input UpdateDiscordUserInput {
+    filter: DiscordUserFilter!
+    remove: DiscordUserPatch
+    set: DiscordUserPatch
+}
+
+input WithinFilter {
+    polygon: PolygonRef!
+}

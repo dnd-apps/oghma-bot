@@ -13,4 +13,4 @@ services:
       - 8000:8000
       - 9080:9080
     volumes:
-      - /tmp/docker-container/oghma-bot/dgraph:/dgraph
+      - $PWD/tmp/dgraph:/dgraph

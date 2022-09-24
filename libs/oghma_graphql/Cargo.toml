@@ -1,0 +1,13 @@
+[package]
+name = "oghma_graphql"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = "1"
+rust-embed = "6.4.1"
+graphql_client = "0"
+serde_json = "1"
+reqwest = { version = "0", features = ["json"] }

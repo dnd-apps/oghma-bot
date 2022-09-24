@@ -19,7 +19,7 @@ fn default_rust_log() -> String {
 pub fn init() {
     env::set_var(
         "RUST_LOG",
-        env::var("RUST_LOG").unwrap_or(default_rust_log()),
+        env::var("RUST_LOG").unwrap_or_else(|_| default_rust_log()),
     );
     env_logger::init();
     debug!("Initialized Logger <3");

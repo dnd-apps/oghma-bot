@@ -1,0 +1,18 @@
+type DiscordUser {
+    id: ID!,
+    snowflake: String! @id @search(by: [hash]),
+    name: String
+}
+
+type DiscordNickname {
+    id: ID!,
+    user: DiscordUser,
+    nickname: String
+}
+
+
+type DiscordGroup {
+    id: ID!,
+    name: String,
+    users: [DiscordNickname!]
+}

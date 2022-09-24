@@ -1,0 +1,12 @@
+mutation AddDiscordUser($snowflake: String!, $name: String!) {
+    addDiscordUser(input: {
+        snowflake: $snowflake,
+        name: $name
+    }) {
+        discordUser {
+            id,
+            snowflake,
+            name
+        }
+    }
+}
