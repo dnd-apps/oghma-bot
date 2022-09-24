@@ -12,6 +12,6 @@ type DiscordNickname {
 
 type DiscordGroup {
   id: ID!
-  name: String
+  snowflake: String! @id @search(by: [hash])
   users: [DiscordNickname!]
 }

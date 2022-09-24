@@ -24,8 +24,17 @@ pub enum Action {
     UploadSchema,
 
     /// Fetch All Users
-    GetUsers,
+    UsersAll,
 
     /// Add a discord user via CLI
-    AddUser { snowflake: String, name: String },
+    UsersAdd { snowflake: String, name: String },
+
+    /// Find a user by snowflake
+    UsersFind { snowflake: String },
+
+    /// Fetch All User Nicknames
+    NicknamesAll,
+
+    /// Add nickname for a user
+    NicknamesAdd { snowflake: String, name: String },
 }

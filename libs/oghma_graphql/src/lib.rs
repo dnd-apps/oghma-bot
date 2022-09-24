@@ -1,6 +1,7 @@
 pub mod entities;
 mod graphql;
 mod requests;
+mod utils;
 
 use rust_embed::RustEmbed;
 

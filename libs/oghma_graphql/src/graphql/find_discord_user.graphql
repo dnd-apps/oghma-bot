@@ -1,0 +1,7 @@
+query FindDiscordUser($snowflake: String) {
+  queryDiscordUser(filter: { snowflake: {eq: $snowflake} }) {
+    id
+    snowflake
+    name
+  }
+}

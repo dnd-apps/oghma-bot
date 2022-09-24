@@ -1,0 +1,16 @@
+mutation AddDiscordNickname($user: DiscordUserRef!, $name: String!) {
+  addDiscordNickname(input: {
+    user: $user,
+    nickname: $name
+  }) {
+    discordNickname {
+      id,
+      user {
+        id,
+        snowflake,
+        name
+      },
+      nickname
+    }
+  }
+}
