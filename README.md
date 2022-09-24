@@ -2,9 +2,10 @@
 
 Bot for D&amp;D to aid in some trivial tasks that can be tedious at the start of the session
 
-## Current Planned Features
+## Current Features
 
 > More can be added, i just want to get this content added initially. 
+> Will check when completed. 
 
 - [ ] Nickname Manager
 - [ ] Roll Tables
