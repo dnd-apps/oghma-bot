@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+
       - name: Setup | Rust | Nightly
         uses: ATiltedTree/setup-rust@v1
         with:
@@ -35,9 +39,14 @@ jobs:
             target/release
             target/debug
           key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+
       - name: Build
         run: cargo build --verbose
+
       - name: Run tests
         run: cargo test --verbose
+
       - name: Lint
-        run: cargo fmt -- --check
+        run: |
+          cargo fmt -- --check
+          npx prettier --check ./.github/**/* ./
