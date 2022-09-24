@@ -7,3 +7,8 @@ args = ["-n", "dgraph", "port-forward", "service/demo-dgraph-alpha", "8123:8080"
 workspace = false
 command = "cargo"
 args = ["run", "--bin", "oghma-admin", "--", "upload-schema"]
+
+
+[tasks.prettier]
+workspace = false
+script = "npx prettier --write ./.github/**/* ./"

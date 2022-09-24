@@ -1,12 +1,12 @@
 mutation {
-	addDiscordNickname(
-		input: {
-			nickname: "[DM] Grandmaster Oinkers"
-			user: { id: "0x5", snowflake: 12141, name: "derp-e-hooves" }
-		}
-	) {
-		discordNickname {
-			id
-		}
-	}
+  addDiscordNickname(
+    input: {
+      nickname: "[DM] Grandmaster Oinkers"
+      user: { id: "0x5", snowflake: 12141, name: "derp-e-hooves" }
+    }
+  ) {
+    discordNickname {
+      id
+    }
+  }
 }
