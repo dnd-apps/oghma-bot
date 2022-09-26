@@ -1,0 +1,25 @@
+mutation AddDiscordUser($snowflake: String!, $name: String!) {
+  addDiscordUser(input: { snowflake: $snowflake, name: $name }) {
+    discordUser {
+      id
+      snowflake
+      name
+    }
+  }
+}
+
+query FindDiscordUser($snowflake: String) {
+  queryDiscordUser(filter: { snowflake: { eq: $snowflake } }) {
+    id
+    snowflake
+    name
+  }
+}
+
+query QueryDiscordUsers {
+  queryDiscordUser(filter: { has: snowflake }) {
+    id
+    snowflake
+    name
+  }
+}

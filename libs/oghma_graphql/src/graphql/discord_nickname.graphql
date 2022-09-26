@@ -11,3 +11,15 @@ mutation AddDiscordNickname($user: DiscordUserRef!, $name: String!) {
     }
   }
 }
+
+query QueryDiscordNicknames {
+  queryDiscordNickname(filter: { has: nickname }) {
+    id
+    user {
+      id
+      name
+      snowflake
+    }
+    nickname
+  }
+}

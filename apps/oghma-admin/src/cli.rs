@@ -6,7 +6,9 @@ use clap::Parser;
 #[clap(about = "Manage Oghma instance", long_about = None)]
 pub struct Cli {
     /// Set the host for which to interact with.
-    #[clap(long, default_value_t=String::from("http://localhost:8123"), value_parser)]
+    /// Can be also set by setting the environment variable `OGHMA_DB_ADDRESS`.
+    /// Default value populated with env var
+    #[clap(long, default_value_t={std::env::var("OGHMA_DB_ADDRESS").unwrap_or(String::from("http://localhost:8123"))}, value_parser)]
     pub host: String,
     #[clap(subcommand)]
     pub action: Action,
@@ -15,13 +17,25 @@ pub struct Cli {
 #[derive(clap::Subcommand)]
 pub enum Action {
     /// Download the mutated dgraph schema.
-    DownloadSchema {
+    SchemaDownload {
         #[clap(short, long)]
         output_file: Option<String>,
     },
 
     /// Upload our schema to dgraph.
-    UploadSchema,
+    SchemaUpload,
+
+    /// Fetch all Discord voice channels
+    VoiceChannelsAll,
+
+    /// Add a voice channel
+    VoiceChannelsAdd { snowflake: String },
+
+    /// Fetch All User Nicknames
+    NicknamesAll,
+
+    /// Add nickname for a user
+    NicknamesAdd { snowflake: String, name: String },
 
     /// Fetch All Users
     UsersAll,
@@ -31,10 +45,4 @@ pub enum Action {
 
     /// Find a user by snowflake
     UsersFind { snowflake: String },
-
-    /// Fetch All User Nicknames
-    NicknamesAll,
-
-    /// Add nickname for a user
-    NicknamesAdd { snowflake: String, name: String },
 }

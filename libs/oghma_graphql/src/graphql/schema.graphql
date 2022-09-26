@@ -10,8 +10,8 @@ type DiscordNickname {
   nickname: String
 }
 
-type DiscordGroup {
+type DiscordVoiceChannel {
   id: ID!
   snowflake: String! @id @search(by: [hash])
-  users: [DiscordNickname!]
+  user_nicknames: [DiscordNickname!]
 }

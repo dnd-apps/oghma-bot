@@ -1,0 +1,53 @@
+query QueryDiscordVoiceChannels {
+  queryDiscordVoiceChannel(filter: { has: snowflake }) {
+    id
+    snowflake
+    user_nicknames {
+      id,
+      nickname,
+      user {
+        id,
+        name,
+        snowflake
+      }
+    }
+  }
+}
+
+
+mutation AddDiscordVoiceChannel($snowflake: String!) {
+  addDiscordVoiceChannel(input: { snowflake: $snowflake, }) {
+    discordVoiceChannel {
+      id
+      snowflake,
+      user_nicknames {
+        id,
+        user {
+          id,
+          name,
+          snowflake
+        }
+        nickname
+      }
+    }
+  }
+}
+
+
+mutation AddDiscordVoiceChannelUserNickname($id: ID!, $nickname: DiscordNicknameRef!) {
+  updateDiscordVoiceChannel(input: {filter: {id: [$id]}, set: {user_nicknames: [$nickname]}}) {
+    discordVoiceChannel {
+      id,
+      snowflake,
+      user_nicknames {
+        id,
+        nickname,
+        user {
+          id,
+          name,
+          snowflake
+        }
+      }
+    }
+  }
+}
