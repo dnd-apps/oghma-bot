@@ -1,5 +1,11 @@
 # oghma-bot
 
+## DISCLAIMER
+
+This project is on hold, my desktops graphics card is having issues and i dont have the funds for a new one at this time. 
+
+## Info
+
 Bot for D&amp;D to aid in some trivial tasks that can be tedious at the start of the session
 
 [![Build](https://github.com/mbround18/oghma-bot/actions/workflows/build.yml/badge.svg)](https://github.com/mbround18/oghma-bot/actions/workflows/build.yml)
