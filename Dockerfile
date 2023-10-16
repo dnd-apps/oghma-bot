@@ -30,7 +30,7 @@ RUN cargo build --release
 # ------------------- #
 # -- Oghma Runtime -- #
 # ------------------- #
-FROM debian:11-slim as runtime
+FROM debian:12-slim as runtime
 WORKDIR /apps
 COPY --from=builder /data/oghma/target/x86_64-unknown-linux-gnu/release/oghma-bot /data/oghma/target/release/oghma-bot ./
 ENTRYPOINT ["/apps/oghma-bot"]
