@@ -19,7 +19,7 @@ RUN cargo chef cook --release --target x86_64-unknown-linux-gnu --recipe-path re
 # ------------------- #
 # -- Oghma Builder -- #
 # ------------------- #
-FROM rust:1.66 as builder
+FROM rust:1.73 as builder
 WORKDIR /data/oghma
 COPY . .
 # Copy over the cached dependencies
