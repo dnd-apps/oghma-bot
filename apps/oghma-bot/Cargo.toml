@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 env_logger = "0"
-log = "0"
+log = "0.4.21"
 serenity = {version ="0", default-features = false,  features =["http", "model", "client", "gateway", "rustls_backend"]}
 tokio = { version = "1", features = ["rt-multi-thread"] }
 dotenv = "0.15.0"
