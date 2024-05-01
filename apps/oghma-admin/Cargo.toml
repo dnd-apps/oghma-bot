@@ -15,5 +15,5 @@ oghma_graphql = {path= "../../libs/oghma_graphql" }
 reqwest = { version = "0", features = ["json", "serde_json"] }
 tokio = "1"
 oghma_logger = {path="../../libs/oghma_logger"}
-graphql_client = "0"
+graphql_client = "0.14.0"
 comfy-table = "6.2.0"
