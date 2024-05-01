@@ -10,5 +10,5 @@ env_logger = "0"
 log = "0"
 serenity = {version ="0", default-features = false,  features =["http", "model", "client", "gateway", "rustls_backend"]}
 tokio = { version = "1", features = ["rt-multi-thread"] }
-dotenv = "0"
+dotenv = "0.15.0"
 oghma_logger = {path="../../libs/oghma_logger"}
