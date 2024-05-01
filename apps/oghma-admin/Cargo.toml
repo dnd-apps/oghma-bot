@@ -12,7 +12,7 @@ log = "0.4.21"
 serde = "1.0.200"
 clap = {version="3.2.25", features = ["derive"]}
 oghma_graphql = {path= "../../libs/oghma_graphql" }
-reqwest = { version = "0", features = ["json", "serde_json"] }
+reqwest = { version = "0.12.4", features = ["json", "serde_json"] }
 tokio = "1"
 oghma_logger = {path="../../libs/oghma_logger"}
 graphql_client = "0.14.0"
