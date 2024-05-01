@@ -9,7 +9,7 @@ edition = "2021"
 dotenv = "0.15.0"
 env_logger = "0"
 log = "0.4.21"
-serde = "1"
+serde = "1.0.199"
 clap = {version="3.2.25", features = ["derive"]}
 oghma_graphql = {path= "../../libs/oghma_graphql" }
 reqwest = { version = "0", features = ["json", "serde_json"] }
